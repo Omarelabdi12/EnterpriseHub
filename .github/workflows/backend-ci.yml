@@ -16,6 +16,21 @@ jobs:
     name: Build and Test Backend
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: enterprisehub
+          POSTGRES_USER: enterprisehub
+          POSTGRES_PASSWORD: enterprisehub123
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U enterprisehub -d enterprisehub"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     defaults:
       run:
         working-directory: Backend
@@ -31,5 +46,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run tests
+      - name: Make Maven Wrapper executable
+        run: chmod +x mvnw
+
+      - name: Build and test
         run: ./mvnw clean test
