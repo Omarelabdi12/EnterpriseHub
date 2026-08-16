@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: enterprisehub-postgres
+    environment:
+      POSTGRES_DB: enterprisehub
+      POSTGRES_USER: enterprisehub
+      POSTGRES_PASSWORD: enterprisehub123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
