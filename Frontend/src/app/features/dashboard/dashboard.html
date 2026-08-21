@@ -1,0 +1,59 @@
+<section class="dashboard">
+
+  <header class="dashboard-header">
+    <div>
+      <span class="eyebrow">OVERVIEW</span>
+      <h2>Good evening, Omar</h2>
+      <p>Voici ce qui se passe dans votre magasin aujourd'hui.</p>
+    </div>
+
+    <button class="primary-action">
+      + Nouvelle commande
+    </button>
+  </header>
+
+  <section class="kpi-grid">
+
+    <article class="kpi-card">
+      <span>Chiffre d'affaires</span>
+      <strong>{{ (stats$ | async)?.revenue | number:'1.0-0' }} €</strong>
+      <small>+12,4 % ce mois</small>
+    </article>
+
+    <article class="kpi-card">
+      <span>Commandes</span>
+      <strong>{{ (stats$ | async)?.orders }}</strong>
+      <small>+8,2 % ce mois</small>
+    </article>
+
+    <article class="kpi-card">
+      <span>Nouveaux clients</span>
+      <strong>{{ (stats$ | async)?.newCustomers }}</strong>
+      <small>+14,1 % ce mois</small>
+    </article>
+
+    <article class="kpi-card">
+      <span>Stock critique</span>
+      <strong>{{ (stats$ | async)?.criticalStock }}</strong>
+      <small>Références à surveiller</small>
+    </article>
+
+  </section>
+  <section class="analytics-section">
+
+  <div class="section-header">
+    <div>
+      <span class="eyebrow">ANALYTICS</span>
+      <h3>Évolution du chiffre d'affaires</h3>
+    </div>
+
+    <button class="period-selector">
+      6 derniers mois
+    </button>
+  </div>
+
+  <app-revenue-chart></app-revenue-chart>
+
+</section>
+
+</section>

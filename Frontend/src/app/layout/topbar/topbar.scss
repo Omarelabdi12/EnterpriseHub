@@ -1,0 +1,175 @@
+:host {
+  display: block;
+}
+
+.topbar-container {
+  height: 72px;
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  background: rgba(8, 11, 18, 0.72);
+  border-bottom: 1px solid var(--opti-border);
+
+  backdrop-filter: blur(20px);
+}
+
+.page-context {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.page-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--opti-primary);
+}
+
+.page-context h1 {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-button {
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  background: transparent;
+  color: var(--opti-text-muted);
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease;
+}
+
+.icon-button:hover {
+  background: var(--opti-surface);
+  border-color: var(--opti-border);
+  color: var(--opti-text);
+}
+
+.icon-button lucide-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: var(--opti-primary);
+
+  box-shadow: 0 0 8px var(--opti-primary);
+}
+
+.topbar-divider {
+  width: 1px;
+  height: 28px;
+  margin: 0 8px;
+
+  background: var(--opti-border);
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 8px 5px 5px;
+
+  border: 1px solid transparent;
+  border-radius: 12px;
+
+  background: transparent;
+  color: var(--opti-text);
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.user-menu:hover {
+  background: var(--opti-surface);
+  border-color: var(--opti-border);
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    var(--opti-primary),
+    #818cf8
+  );
+
+  color: #061018;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.user-info span {
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.user-info small {
+  font-size: 10px;
+  color: var(--opti-text-muted);
+}
+
+.user-menu > lucide-icon {
+  width: 15px;
+  height: 15px;
+
+  margin-left: 4px;
+
+  color: var(--opti-text-muted);
+}   
