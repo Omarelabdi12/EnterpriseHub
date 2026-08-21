@@ -1,35 +1,23 @@
 <div class="chart-container">
-<div class="chart-toolbar">
-  <div>
-    <span class="chart-label">CHIFFRE D’AFFAIRES</span>
-    <h3>Évolution des revenus</h3>
+
+  <div class="chart-toolbar">
+    <div>
+      <span class="chart-label">CHIFFRE D’AFFAIRES</span>
+      <h3>Évolution des revenus</h3>
+    </div>
   </div>
 
-  <div class="period-selector">
-    <button
-      [class.active]="selectedPeriod === '6m'"
-      (click)="changePeriod('6m')">
-      6 mois
-    </button>
-
-    <button
-      [class.active]="selectedPeriod === '1y'"
-      (click)="changePeriod('1y')">
-      1 an
-    </button>
-  </div>
-</div>
-<apx-chart
-  [series]="series"
-  [chart]="chart"
-  [stroke]="stroke"
-  [fill]="fill"
-  [markers]="markers"
-  [dataLabels]="dataLabels"
-  [xaxis]="xaxis"
-  [yaxis]="yaxis"
-  [grid]="grid"
-  [tooltip]="tooltip">
-</apx-chart>
+  <apx-chart
+    [series]="series"
+    [chart]="chart"
+    [stroke]="stroke"
+    [fill]="fill"
+    [markers]="markers"
+    [dataLabels]="dataLabels"
+    [xaxis]="xaxis"
+    [yaxis]="yaxis"
+    [grid]="grid"
+    [tooltip]="tooltip">
+  </apx-chart>
 
 </div>

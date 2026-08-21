@@ -1,0 +1,207 @@
+<div class="login-page">
+
+  <div class="background-grid"></div>
+
+  <div class="login-layout">
+
+    <!-- LEFT SIDE -->
+    <section class="hero-section">
+
+      <div class="brand">
+        <div class="brand-logo">
+          O
+        </div>
+
+        <span>OptiHub</span>
+      </div>
+
+      <div class="hero-content">
+
+        <div class="eyebrow">
+          <span class="pulse"></span>
+          BUSINESS MANAGEMENT PLATFORM
+        </div>
+
+        <h1>
+          Tout votre business.
+          <br />
+          <span>Un seul espace.</span>
+        </h1>
+
+        <p>
+          Gérez vos opérations, vos clients, vos projets et
+          votre activité depuis une plateforme pensée pour
+          les entreprises modernes.
+        </p>
+
+        <div class="feature-list">
+
+          <div class="feature">
+            <div class="feature-icon">↗</div>
+            <div>
+              <strong>Centralisez votre activité</strong>
+              <span>Toutes vos données au même endroit.</span>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">◈</div>
+            <div>
+              <strong>Visualisez vos performances</strong>
+              <span>Des indicateurs clairs pour décider plus vite.</span>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">⌁</div>
+            <div>
+              <strong>Travaillez efficacement</strong>
+              <span>Une expérience conçue pour la productivité.</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="hero-footer">
+        © 2026 OptiHub
+      </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+    <section class="login-section">
+
+      <div class="login-card">
+
+        <div class="mobile-brand">
+          <div class="brand-logo">
+            O
+          </div>
+          <span>OptiHub</span>
+        </div>
+
+        <div class="login-header">
+          <h2>Bienvenue</h2>
+
+          <p>
+            Connectez-vous à votre espace OptiHub.
+          </p>
+        </div>
+
+
+        <form (ngSubmit)="onSubmit()">
+
+          <div class="input-group">
+
+            <label for="email">
+              Adresse email
+            </label>
+
+            <div class="input-wrapper">
+
+              <span class="input-icon">
+                @
+              </span>
+
+              <input
+                id="email"
+                type="email"
+                [(ngModel)]="email"
+                name="email"
+                placeholder="vous@entreprise.com"
+                autocomplete="email"
+                required
+              />
+
+            </div>
+
+          </div>
+
+
+          <div class="input-group">
+
+            <div class="label-row">
+              <label for="password">
+                Mot de passe
+              </label>
+
+              <a href="#">
+                Mot de passe oublié ?
+              </a>
+            </div>
+
+            <div class="input-wrapper">
+
+              <span class="input-icon">
+                •••
+              </span>
+
+              <input
+                id="password"
+                type="password"
+                [(ngModel)]="password"
+                name="password"
+                placeholder="Votre mot de passe"
+                autocomplete="current-password"
+                required
+              />
+
+            </div>
+
+          </div>
+
+
+          <label class="remember">
+
+            <input
+              type="checkbox"
+              name="remember"
+            />
+
+            <span>
+              Se souvenir de moi
+            </span>
+
+          </label>
+
+
+          <button
+            type="submit"
+            class="login-button"
+          >
+
+            <span>
+              Se connecter
+            </span>
+
+            <span class="button-arrow">
+              →
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <div class="secure-login">
+
+          <span class="secure-icon">
+            ✓
+          </span>
+
+          <span>
+            Connexion sécurisée
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

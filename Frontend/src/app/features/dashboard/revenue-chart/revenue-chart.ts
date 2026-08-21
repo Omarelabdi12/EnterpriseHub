@@ -1,6 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ApexFill } from 'ng-apexcharts';
+
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -12,8 +13,10 @@ import {
   ApexYAxis,
   NgApexchartsModule,
 } from 'ng-apexcharts';
+
 import { DashboardService } from '../../../core/services/dashboard';
 import { RevenuePoint } from '../../../core/models/dashboard.model';
+
 @Component({
   selector: 'app-revenue-chart',
   imports: [NgApexchartsModule],
@@ -21,7 +24,13 @@ import { RevenuePoint } from '../../../core/models/dashboard.model';
   styleUrl: './revenue-chart.scss',
 })
 export class RevenueChart {
-revenueData: RevenuePoint[] = [];
+
+  private readonly dashboardService = inject(DashboardService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  revenueData: RevenuePoint[] = [];
+
+  selectedPeriod: '6m' | '1y' = '6m';
 
   series: ApexAxisChartSeries = [
     {
@@ -31,25 +40,26 @@ revenueData: RevenuePoint[] = [];
   ];
 
   chart: ApexChart = {
-  type: 'area',
-  height: 320,
-  toolbar: {
-    show: false,
-  },
-  background: 'transparent',
-  animations: {
-    enabled: true,
-    speed: 800,
-    animateGradually: {
-      enabled: true,
-      delay: 120,
+    type: 'area',
+    height: 320,
+    toolbar: {
+      show: false,
     },
-    dynamicAnimation: {
+    background: 'transparent',
+    animations: {
       enabled: true,
-      speed: 350,
+      speed: 800,
+      animateGradually: {
+        enabled: true,
+        delay: 120,
+      },
+      dynamicAnimation: {
+        enabled: true,
+        speed: 350,
+      },
     },
-  },
-};
+  };
+
   stroke: ApexStroke = {
     curve: 'smooth',
     width: 3,
@@ -75,65 +85,62 @@ revenueData: RevenuePoint[] = [];
 
   tooltip: ApexTooltip = {
     y: {
-      formatter: (value) => `${value.toLocaleString('fr-FR')} €`,
+      formatter: (value) =>
+        `${value.toLocaleString('fr-FR')} €`,
     },
   };
+
   fill: ApexFill = {
-  type: 'gradient',
-  gradient: {
-    shadeIntensity: 1,
-    opacityFrom: 0.35,
-    opacityTo: 0.02,
-    stops: [0, 100],
-  },
-  
-};
-markers = {
-  size: 0,
-  hover: {
-    size: 6,
-  },
-};
-  private readonly dashboardService = inject(DashboardService);
-  private readonly destroyRef = inject(DestroyRef);
-  selectedPeriod: '6m' | '1y' = '6m';
-  revenue$ = this.dashboardService.getRevenue(this.selectedPeriod);
+    type: 'gradient',
+    gradient: {
+      shadeIntensity: 1,
+      opacityFrom: 0.35,
+      opacityTo: 0.02,
+      stops: [0, 100],
+    },
+  };
+
+  markers = {
+    size: 0,
+    hover: {
+      size: 6,
+    },
+  };
+
   constructor() {
-  this.revenue$.pipe(
-    takeUntilDestroyed(this.destroyRef)
-  ).subscribe((data) => {
-    this.revenueData = data;
+    this.dashboardService
+      .getRevenue()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((data) => {
+        this.revenueData = data;
+        this.updateChart();
+      });
+  }
 
-    this.series = [
-      {
-        name: 'Chiffre d’affaires',
-        data: data.map((point) => point.value),
-      },
-    ];
+  changePeriod(period: '6m' | '1y'): void {
+    this.selectedPeriod = period;
+    this.updateChart();
+  }
 
-    this.xaxis = {
-      categories: data.map((point) => point.label),
-    };
-  });
+  private updateChart(): void {
+  const data =
+    this.selectedPeriod === '6m'
+      ? this.revenueData.slice(-6)
+      : this.revenueData.slice(-12);
 
-}
-changePeriod(period: '6m' | '1y'): void {
-  this.selectedPeriod = period;
+  console.log('DATA:', data);
+  console.log('REVENUE:', data.map(point => point.revenue));
+  console.log('MONTHS:', data.map(point => point.month));
 
-  this.dashboardService
-    .getRevenue(period)
-    .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe((data) => {
-      this.series = [
-        {
-          name: 'Chiffre d’affaires',
-          data: data.map((point) => point.value),
-        },
-      ];
+  this.series = [
+    {
+      name: 'Chiffre d’affaires',
+      data: data.map(point => point.revenue),
+    },
+  ];
 
-      this.xaxis = {
-        categories: data.map((point) => point.label),
-      };
-    });
+  this.xaxis = {
+    categories: data.map(point => point.month),
+  };
 }
 }

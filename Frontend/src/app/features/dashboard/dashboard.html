@@ -1,59 +1,108 @@
-<section class="dashboard">
+<div class="dashboard">
 
+  <!-- Header -->
   <header class="dashboard-header">
     <div>
       <span class="eyebrow">OVERVIEW</span>
-      <h2>Good evening, Omar</h2>
-      <p>Voici ce qui se passe dans votre magasin aujourd'hui.</p>
+
+      <h2>Dashboard</h2>
+
+      <p>
+        Overview of your business performance
+      </p>
     </div>
 
     <button class="primary-action">
-      + Nouvelle commande
+      View reports
     </button>
   </header>
 
-  <section class="kpi-grid">
 
-    <article class="kpi-card">
-      <span>Chiffre d'affaires</span>
-      <strong>{{ (stats$ | async)?.revenue | number:'1.0-0' }} €</strong>
-      <small>+12,4 % ce mois</small>
-    </article>
+  <!-- Statistics -->
+  @if (stats$ | async; as stats) {
+    <section class="stats-grid">
 
-    <article class="kpi-card">
-      <span>Commandes</span>
-      <strong>{{ (stats$ | async)?.orders }}</strong>
-      <small>+8,2 % ce mois</small>
-    </article>
+      <!-- Revenue -->
+      <article class="stat-card">
+        <div class="stat-card-content">
+          <span class="stat-label">Revenue</span>
 
-    <article class="kpi-card">
-      <span>Nouveaux clients</span>
-      <strong>{{ (stats$ | async)?.newCustomers }}</strong>
-      <small>+14,1 % ce mois</small>
-    </article>
+          <strong>
+            {{ stats.revenue | number:'1.0-0' }} €
+          </strong>
 
-    <article class="kpi-card">
-      <span>Stock critique</span>
-      <strong>{{ (stats$ | async)?.criticalStock }}</strong>
-      <small>Références à surveiller</small>
-    </article>
+          <small>+8% ce mois</small>
+        </div>
+      </article>
 
-  </section>
-  <section class="analytics-section">
+
+      <!-- Orders -->
+      <article class="stat-card">
+        <div class="stat-card-content">
+          <span class="stat-label">Orders</span>
+
+          <strong>
+            {{ stats.orders | number:'1.0-0' }}
+          </strong>
+
+          <small>+12% ce mois</small>
+        </div>
+      </article>
+
+
+      <!-- New customers -->
+      <article class="stat-card">
+        <div class="stat-card-content">
+          <span class="stat-label">New customers</span>
+
+          <strong>
+            {{ stats.newCustomers | number:'1.0-0' }}
+          </strong>
+
+          <small>+6% ce mois</small>
+        </div>
+      </article>
+
+
+      <!-- Critical stock -->
+      <article class="stat-card">
+        <div class="stat-card-content">
+          <span class="stat-label">Critical stock</span>
+
+          <strong>
+            {{ stats.criticalStock | number:'1.0-0' }}
+          </strong>
+
+          <small>+3% ce mois</small>
+        </div>
+      </article>
+
+    </section>
+  }
+
+
+  <!-- Revenue analytics -->
+ <section class="analytics-section">
 
   <div class="section-header">
-    <div>
+
+    <div class="section-title">
       <span class="eyebrow">ANALYTICS</span>
-      <h3>Évolution du chiffre d'affaires</h3>
+      <h3>Revenue overview</h3>
     </div>
 
-    <button class="period-selector">
-      6 derniers mois
-    </button>
+    <select class="period-selector">
+      <option value="6">Last 6 months</option>
+      <option value="12">Last 12 months</option>
+      <option value="24">Last 2 years</option>
+    </select>
+
   </div>
 
-  <app-revenue-chart></app-revenue-chart>
+  <div class="chart-container">
+    <app-revenue-chart></app-revenue-chart>
+  </div>
 
 </section>
 
-</section>
+</div>
