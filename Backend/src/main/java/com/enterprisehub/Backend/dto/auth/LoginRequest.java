@@ -1,4 +1,7 @@
 package com.enterprisehub.Backend.dto.auth;
 
-public class LoginRequest {
+public record LoginRequest(
+        String email,
+        String password
+) {
 }
