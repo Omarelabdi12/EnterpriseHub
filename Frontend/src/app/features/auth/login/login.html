@@ -80,19 +80,45 @@
           <div class="brand-logo">
             O
           </div>
+
           <span>OptiHub</span>
         </div>
 
+
         <div class="login-header">
+
           <h2>Bienvenue</h2>
 
           <p>
             Connectez-vous à votre espace OptiHub.
           </p>
+
         </div>
 
 
-        <form (ngSubmit)="onSubmit()">
+        <!-- ERROR MESSAGE -->
+
+        @if (errorMessage) {
+
+          <div class="login-error">
+
+            <span class="error-icon">!</span>
+
+            <span>
+              {{ errorMessage }}
+            </span>
+
+          </div>
+
+        }
+
+
+        <form
+          (ngSubmit)="login()"
+          #loginForm="ngForm"
+        >
+
+          <!-- EMAIL -->
 
           <div class="input-group">
 
@@ -114,6 +140,7 @@
                 placeholder="vous@entreprise.com"
                 autocomplete="email"
                 required
+                [disabled]="loading"
               />
 
             </div>
@@ -121,16 +148,23 @@
           </div>
 
 
+          <!-- PASSWORD -->
+
           <div class="input-group">
 
             <div class="label-row">
+
               <label for="password">
                 Mot de passe
               </label>
 
-              <a href="#">
+              <a
+                href="#"
+                (click)="$event.preventDefault()"
+              >
                 Mot de passe oublié ?
               </a>
+
             </div>
 
             <div class="input-wrapper">
@@ -147,6 +181,7 @@
                 placeholder="Votre mot de passe"
                 autocomplete="current-password"
                 required
+                [disabled]="loading"
               />
 
             </div>
@@ -154,11 +189,15 @@
           </div>
 
 
+          <!-- REMEMBER ME -->
+
           <label class="remember">
 
             <input
               type="checkbox"
               name="remember"
+              [(ngModel)]="rememberMe"
+              [disabled]="loading"
             />
 
             <span>
@@ -168,23 +207,40 @@
           </label>
 
 
+          <!-- LOGIN BUTTON -->
+
           <button
             type="submit"
             class="login-button"
+            [disabled]="loading || loginForm.invalid"
           >
 
-            <span>
-              Se connecter
-            </span>
+            @if (!loading) {
 
-            <span class="button-arrow">
-              →
-            </span>
+              <span>
+                Se connecter
+              </span>
+
+              <span class="button-arrow">
+                →
+              </span>
+
+            } @else {
+
+              <span class="login-spinner"></span>
+
+              <span>
+                Connexion...
+              </span>
+
+            }
 
           </button>
 
         </form>
 
+
+        <!-- SECURITY -->
 
         <div class="secure-login">
 

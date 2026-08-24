@@ -1,4 +1,5 @@
 services:
+
   postgres:
     image: postgres:17
     container_name: enterprisehub-postgres
@@ -11,5 +12,26 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  backend:
+    build:
+      context: ../Backend
+      dockerfile: Dockerfile
+    container_name: optihub-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ../Frontend
+      dockerfile: Dockerfile
+    container_name: optihub-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
 volumes:
   postgres_data:

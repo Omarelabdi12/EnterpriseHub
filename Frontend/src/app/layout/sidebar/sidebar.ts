@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import {
   LayoutDashboard,
@@ -11,7 +11,10 @@ import {
   BarChart3,
   Settings,
   UserRound,
+  LogOut
 } from 'lucide-angular';
+import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -30,4 +33,12 @@ export class Sidebar {
   readonly BarChart3 = BarChart3;
   readonly Settings = Settings;
   readonly UserRound = UserRound;
+  readonly LogOut = LogOut;
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
+logout(): void {  
+  this.authService.logout();
+  this.router.navigate(['/login']);
+}
 }

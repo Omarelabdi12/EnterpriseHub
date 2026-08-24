@@ -1,22 +1,24 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { DashboardStats, RevenuePoint  } from '../models/dashboard.model';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { ApiService } from './api';
+import {
+  DashboardStats,
+  RevenuePoint
+} from '../models/dashboard.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardService {
-  private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/dashboard';
+
+  private readonly api = inject(ApiService);
+
   getStats(): Observable<DashboardStats> {
-    return this.http.get<DashboardStats>(`${this.apiUrl}/stats`);
+    return this.api.get<DashboardStats>('/dashboard/stats');
   }
-  
 
   getRevenue(): Observable<RevenuePoint[]> {
-    return this.http.get<RevenuePoint[]>(
-      `${this.apiUrl}/revenue`
-    );
+    return this.api.get<RevenuePoint[]>('/dashboard/revenue');
   }
 }

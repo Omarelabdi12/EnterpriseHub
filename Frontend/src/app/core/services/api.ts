@@ -6,9 +6,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
 
-  private readonly baseUrl = 'http://localhost:8080/api';
+  private readonly baseUrl = '/api';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {
+    console.log('API BASE URL:', this.baseUrl);
+  }
 
   get<T>(endpoint: string) {
     return this.http.get<T>(`${this.baseUrl}${endpoint}`);
